@@ -17,9 +17,16 @@ use App\Http\Controllers\WordController;
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
-
 });
 
 Route::get('/words', function (Request $request) {
     return WordController::getWords();
+});
+
+Route::get('/words', function (Request $request) {
+    return WordController::getWordByParsed($request->get('word'));
+});
+
+Route::post('/wordbase', function (Request $request) {
+    return WordController::postWordsFromUrl($request->get('url'));
 });
